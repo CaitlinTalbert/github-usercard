@@ -90,7 +90,7 @@ function myCard (card) {
   nameH3.classList.add('name');
   usernameP.classList.add('username');
 
-  imgSrc.src = card.data.avatar_url; 
+  imgSrc.src = card.data.avatarUrl; 
   nameH3.textContent = card.data.name;  
   usernameP.textContent = card.data.login; 
   locationP.textContent = `Location: ${card.data.location}`; 
@@ -106,16 +106,15 @@ function myCard (card) {
 function getGitUser(url) {
     axios.get(url)
       .then(resp => {
-        
+        console.log(card(user.data)); 
+        return card(user.data); 
       })
       .catch(error => {
         console.error(error); 
       })
 
 }
-
-
-getGitUser(`https://api.github.com/users/caitlintalbert`); 
+getGitUser(getGitUser(`https://api.github.com/users/caitlintalbert`)); 
 
 /*
   List of LS Instructors Github username's:
