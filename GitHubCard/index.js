@@ -49,6 +49,69 @@ const followersArray = [];
       </div>
     </div>
 */
+function myCard (card) {
+  const cardDiv = document.createElement('div'); 
+  const imgSrc = document.createElement('img'); 
+  const cardInfoDiv = document.createElement('div'); 
+  const nameH3 = document.createElement('h3'); 
+  const usernameP = document.createElement('p'); 
+  const locationP = document.createElement('p'); 
+  const profileP = document.createElement('p'); 
+  const profileLink = document.createElement('a'); 
+  const followersP = document.createElement('p'); 
+  const followingP = document.createElement('p'); 
+  const bioP = document.createElement('p'); 
+
+  imgSrc.appendChild(cardDiv); 
+  cardInfoDiv.appendChild(cardDiv); 
+  nameH3.appendChild(cardInfoDiv); 
+  usernameP.appendChild(cardInfoDiv); 
+  locationP.appendChild(cardInfoDiv); 
+  profileP.appendChild(cardInfoDiv); 
+  profileLink.appendChild(cardInfoDiv); 
+  followersP.appendChild(cardInfoDiv); 
+  followingP.appendChild(cardInfoDiv); 
+  bioP.appendChild(cardInfoDiv); 
+
+  cardDiv.classList.add('card'); 
+
+  imgSrc.src = card.data.imgSrcUrl; 
+
+  cardInfoDiv.classList.add('card-info'); 
+
+  nameH3.classList.add('name');
+  nameH3.textContent = card.data.name;  
+
+  usernameP.classList.add('username'); 
+  usernameP.textContent = card.data.username; 
+
+  locationP.textContent = `Location: ${card.data.location}`; 
+
+  profileP.textContent = `Profile: ${profileLink}`; 
+
+  followersP.textContent = `Followers: ${card.data.followers}`; 
+
+  followingP.textContent = `Following: ${card.data.following}`; 
+
+  bioP.textContent = `Bio: ${card.data.bio}`; 
+
+
+
+
+
+
+
+
+
+
+  return cardDiv; 
+}
+
+
+
+
+
+
 
 /*
   List of LS Instructors Github username's:
