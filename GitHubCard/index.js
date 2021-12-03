@@ -6,6 +6,11 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 
+//axios.get(`https://api.github.com/users/caitlintalbert`)
+//.then() => when promise is fulfilled 
+//.catch() => when error 
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -54,8 +59,6 @@ const followersArray = [];
       </div>
     </div>
 */
-const cards = document.querySelector('.cards'); 
-
 
 function myCard (card) {
   //create elements 
@@ -90,24 +93,27 @@ function myCard (card) {
   nameH3.classList.add('name');
   usernameP.classList.add('username');
 
-  imgSrc.src = card.data.avatarUrl; 
-  nameH3.textContent = card.data.name;  
-  usernameP.textContent = card.data.login; 
-  locationP.textContent = `Location: ${card.data.location}`; 
-  profileP.textContent = `Profile: ${profileLink}`; 
-  profileLink.textContent.href = html_url; 
-  followersP.textContent = `Followers: ${card.data.followers}`; 
-  followingP.textContent = `Following: ${card.data.following}`; 
-  bioP.textContent = `Bio: ${card.data.bio}`; 
+  imgSrc.src = card.avatar_url; 
+  imgSrc.alt = 'github user'; 
+  nameH3.textContent = card.name;  
+  usernameP.textContent = card.login; 
+  locationP.textContent = card.location;  
+  profileP.textContent = "Profile"; 
+  profileLink.textContent = "Link to profile"; 
+  profileLink.href = card.html_url; 
+  followersP.textContent = `Followers: ${card.followers}`; 
+  followingP.textContent = `Following: ${card.following}`; 
+  bioP.textContent = card.bio; 
 
   return cardDiv; 
 }
 
 function getGitUser(url) {
-    axios.get(url)
+
+    axios.get(`https://api.github.com/users/caitlintalbert`)
       .then(resp => {
-        console.log(card(user.data)); 
-        return card(user.data); 
+        console.log(resp.data); 
+        
       })
       .catch(error => {
         console.error(error); 
