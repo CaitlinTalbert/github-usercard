@@ -38,7 +38,21 @@ import axios from 'axios';
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan','dustinmyers','justsml','luishrd','bigknell'];
+
+
+for (let i = 0; i < followersArray.length; i++){
+  githubCard(followersArray[i]); 
+}
+
+function getGitCard(username) {
+  axios.get(`https://api.github.com/users/${username}`)
+    .then(resp => {
+      document.querySelector('.cards').appendChild(githubCard)(resp.data); 
+      
+    })
+    .catch(err => console.error(err))
+}
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -60,22 +74,56 @@ const followersArray = [];
     </div>
 */
 
-function myCard (card) {
+function githubCard (gitInfo) {
   //create elements 
-  const cardDiv = document.createElement('div'); 
-  const imgSrc = document.createElement('img'); 
-  const cardInfoDiv = document.createElement('div'); 
-  const nameH3 = document.createElement('h3'); 
-  const usernameP = document.createElement('p'); 
-  const locationP = document.createElement('p'); 
-  const profileP = document.createElement('p'); 
+  const card = document.createElement('div'); 
+  const img = document.createElement('img'); 
+  const cardInfo = document.createElement('div'); 
+  const name = document.createElement('h3'); 
+  const username = document.createElement('p'); 
+  const location = document.createElement('p'); 
+  const profile = document.createElement('p'); 
   const profileLink = document.createElement('a'); 
-  const followersP = document.createElement('p'); 
-  const followingP = document.createElement('p'); 
-  const bioP = document.createElement('p'); 
+  const followers = document.createElement('p'); 
+  const following = document.createElement('p'); 
+  const bio = document.createElement('p'); 
+
+
+
+   //set class names, text content, and attributes 
+   card.classList.add('card'); 
+   cardInfo.classList.add('card-info');
+   name.classList.add('name');
+   username.classList.add('username');
+ 
+   img.src = gitInfo.avatar_url; 
+   img.alt = 'github user'; 
+   name.textContent = gitInfo.name;  
+   username.textContent = gitInfo.login; 
+   location.textContent = gitInfo.location;  
+   profile.textContent = "Profile"; 
+   profileLink.textContent = "Link to profile"; 
+   profileLink.href =  gitInfo.html_url; 
+   followers.textContent = `Followers: ${gitInfo.followers}`; 
+   following.textContent = `Following: ${gitInfo.following}`; 
+   bio.textContent = gitInfo.bio; 
+ 
 
 
   //creating hierarchy 
+  card.appendChild(img); 
+  card.appendChild(cardInfo); 
+  cardInfo.appendChild(name); 
+  cardInfo.appendChild(username); 
+  cardInfo.appendChild(location); 
+  cardInfo.appendChild(profile); 
+  profile.appendChild(profile); 
+  cardInfo.appendChild(profileLink); 
+  cardInfo.appendChild(followers); 
+  cardInfo.appendChild(following); 
+  cardInfo.appendChild(bio); 
+
+  /*
   imgSrc.appendChild(cardDiv); 
   cardInfoDiv.appendChild(cardDiv); 
   nameH3.appendChild(cardInfoDiv); 
@@ -86,41 +134,10 @@ function myCard (card) {
   followersP.appendChild(cardInfoDiv); 
   followingP.appendChild(cardInfoDiv); 
   bioP.appendChild(cardInfoDiv); 
-
-  //set class names, text content, and attributes 
-  cardDiv.classList.add('card'); 
-  cardInfoDiv.classList.add('card-info');
-  nameH3.classList.add('name');
-  usernameP.classList.add('username');
-
-  imgSrc.src = card.avatar_url; 
-  imgSrc.alt = 'github user'; 
-  nameH3.textContent = card.name;  
-  usernameP.textContent = card.login; 
-  locationP.textContent = card.location;  
-  profileP.textContent = "Profile"; 
-  profileLink.textContent = "Link to profile"; 
-  profileLink.href = card.html_url; 
-  followersP.textContent = `Followers: ${card.followers}`; 
-  followingP.textContent = `Following: ${card.following}`; 
-  bioP.textContent = card.bio; 
-
-  return cardDiv; 
+*/
+ 
+  return card; 
 }
-
-function getGitUser(url) {
-
-    axios.get(`https://api.github.com/users/caitlintalbert`)
-      .then(resp => {
-        console.log(resp.data); 
-        
-      })
-      .catch(error => {
-        console.error(error); 
-      })
-
-}
-getGitUser(getGitUser(`https://api.github.com/users/caitlintalbert`)); 
 
 /*
   List of LS Instructors Github username's:
